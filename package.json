@@ -2,6 +2,7 @@
   "name": "valkyria-baby",
   "version": "0.0.1",
   "description": "Valkyria baby bot test",
+  "repository": "https://github.com/nosoycesaros/valkyria-baby",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -13,6 +14,7 @@
   "author": "Cesaros",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "botbuilder": "^3.1.1",
+    "restify": "^4.1.1"
   }
 }
