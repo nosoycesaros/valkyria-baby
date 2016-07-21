@@ -23,6 +23,32 @@ server.post('/api/messages', connector.listen());
 // Bots Dialogs
 //=========================================================
 
-bot.dialog('/', function (session) {
-    session.send("Hello, i am Valkyria");
-});
+var responses = [
+  "could you please come back antoher day?",
+  "i am a little girl, we shouldn't talk.",
+  "my developers are working on me right now, sorry."
+]
+
+bot.dialog('/', [
+    function (session, args, next) {
+        if (!session.userData.name) {
+            session.beginDialog('/profile');
+        } else {
+            next();
+        }
+    },
+    function (session, results) {
+      answer = Math.floor(Math.random() * responses.length);
+      session.send('%s '+responses[answer], session.userData.name);
+    }
+]);
+
+bot.dialog('/profile', [
+    function (session) {
+        builder.Prompts.text(session, 'Hello, i am Valkyria. What is your name?');
+    },
+    function (session, results) {
+        session.userData.name = results.response;
+        session.endDialog();
+    }
+]);
