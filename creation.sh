@@ -1,1 +1,1 @@
-sh ../../creation.sh
+sh ../../creation.sh $1
