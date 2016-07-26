@@ -35,6 +35,9 @@ dialog.matches('createProject', [
     function (session, args, next) {
         // Resolve entities passed from LUIS.
         var title = builder.EntityRecognizer.findEntity(args.entities, 'projectName');
+        var project = session.dialogData.project = {
+          title: title ? title.entity : null
+        };
 
         //Define an array of ask for name
         var askForName = [
@@ -44,7 +47,7 @@ dialog.matches('createProject', [
         ];
 
         // Prompt for alarm name
-        if (!title) {
+        if (!project.title) {
             var askForNameNumer =  Math.floor(Math.random() * askForName.length);
             builder.Prompts.text(session, askForName[askForNameNumer]);
         } else {
@@ -52,16 +55,17 @@ dialog.matches('createProject', [
         }
     },
     function (session, results, next) {
+      var project = session.dialogData.project;
         if (results.response) {
-            title = results.response;
+            project.title = results.response;
         }
 
-        if (title) {
+        if (project.title) {
 
-          session.send('Creating %s...', title);
+          session.send('Creating %s...', project.title);
 
-          child_process.exec('sh ./creation.sh ' + title, function(error, stdout, stderr){
-            session.send('Your project %s is ready', title);
+          child_process.exec('sh ./creation.sh ' + project.title, function(error, stdout, stderr){
+            session.send('Your project %s is ready http://valkyria.be/projects/%s', project.title, project.title);
           });
         } else {
           session.send('I am learning right now, and can not help you');
