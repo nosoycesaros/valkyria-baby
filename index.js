@@ -1,3 +1,4 @@
+var child_process = require('child_process');
 var restify = require('restify');
 var builder = require('botbuilder');
 
@@ -56,7 +57,10 @@ dialog.matches('createProject', [
         }
 
         if (title) {
-          session.send('I would love to help you with %s, but i can not right now', title);
+
+          child_process.exec('sh ./creation.sh ' + title, function(error, stdout, stderr){
+            session.send('Your project %s, is ready', title);
+          });
         } else {
           session.send('I am learning right now, and can not help you');
         }

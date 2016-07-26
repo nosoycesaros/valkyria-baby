@@ -5,7 +5,7 @@
   "repository": "https://github.com/nosoycesaros/valkyria-baby",
   "main": "index.js",
   "scripts": {
-    "start": "MICROSOFT_APP_ID=21eb8e33-f5e1-4097-90a7-37d55c0850e9 MICROSOFT_APP_PASSWORD=wYkgPqOWwHkDZDionLCFdVE node index.js"
+    "start": "node index.js"
   },
   "keywords": [
     "valkyria",
