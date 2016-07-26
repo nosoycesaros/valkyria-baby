@@ -58,10 +58,10 @@ dialog.matches('createProject', [
 
         if (title) {
 
-          session.send('Creating %s', title);
+          session.send('Creating %s...', title);
 
           child_process.exec('sh ./creation.sh ' + title, function(error, stdout, stderr){
-            session.send('Your project %s, is ready in %l', title, stdout);
+            session.send('Your project %s, is ready in http://valkyria.be/projects/%l', title, title);
           });
         } else {
           session.send('I am learning right now, and can not help you');
