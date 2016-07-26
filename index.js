@@ -61,7 +61,7 @@ dialog.matches('createProject', [
           session.send('Creating %s...', title);
 
           child_process.exec('sh ./creation.sh ' + title, function(error, stdout, stderr){
-            session.send('Your project %s, is ready in http://valkyria.be/projects/%l', title, title);
+            session.send('Your project %s is ready', title);
           });
         } else {
           session.send('I am learning right now, and can not help you');
